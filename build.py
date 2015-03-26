@@ -14,7 +14,8 @@ hg_dir = os.path.join(here, "hg")
 remote_git = "git@github.com:jgraham/css-test-built.git"
 out_dir = os.path.join(here, "css-test-built")
 
-local_files = ["manifest", "serve", "serve.py", ".gitmodules", "tools", "resources"]
+local_files = ["manifest", "serve", "serve.py", ".gitmodules", "tools", "resources",
+               "config.default.json"]
 
 lock_path = os.path.join(here, ".lock")
 
@@ -59,6 +60,7 @@ def setup_virtualenv():
 def update_template():
     svn = vcs.vcs("svn")
     template_dir = os.path.join(here, "Template-Python")
+
     svn("co", "svn://svn.tt2.org/Template-Python/trunk", template_dir)
     subprocess.check_call(["python", "setup.py", "install"],
                           cwd=template_dir)
