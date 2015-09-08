@@ -70,7 +70,7 @@ def update_to_changeset(changeset):
     hg = vcs.bind_to_repo(vcs.hg, hg_dir)
     hg("update", changeset)
 
-def build_tests(changeset):
+def build_tests():
     subprocess.check_call(["python", os.path.join(hg_dir, "tools", "build.py")],
                            cwd=hg_dir)
 
@@ -171,7 +171,7 @@ def main():
         for changeset in get_new_commits():
             update_to_changeset(changeset)
             old_files = list_current_files()
-            build_tests(changeset)
+            build_tests()
             new_files = copy_files()
             update_git(old_files, new_files)
             new_changeset = add_changeset(changeset)
