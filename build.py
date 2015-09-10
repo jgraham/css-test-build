@@ -82,7 +82,6 @@ def list_current_files():
 
 def copy_files():
     dist_path = os.path.join(hg_dir, "dist")
-    git = vcs.bind_to_repo(vcs.git, out_dir)
     dest_paths = []
     for dir_name, dir_names, file_names in os.walk(dist_path):
         for file_name in file_names:
@@ -174,7 +173,7 @@ def main():
             build_tests()
             new_files = copy_files()
             update_git(old_files, new_files)
-            new_changeset = add_changeset(changeset)
+            add_changeset(changeset)
             commit(changeset)
         push()
     finally:
